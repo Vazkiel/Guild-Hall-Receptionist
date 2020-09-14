@@ -6,6 +6,7 @@ const client = new Discord.Client({disableEveryone: true});
 const config = require('./config.json');
 const token = config.token;
 const prefix = config.prefix;
+const ownerID = config.ownerID;
 
 // Ready Event —
 client.on('ready', () => {
@@ -26,10 +27,13 @@ client.on('message', message => {
         return;
 
     try {
-        delete require.cache[require.resolve(`./commands/${cmd}.js`)];
+        // Options —
+        let ops = {
+            ownerID: ownerID
+        }
 
         let commandFile = require(`./commands/${cmd}.js`);
-        commandFile.run(client, message, args);
+        commandFile.run(client, message, args, ops);
     } 
     catch (e) {
         console.log(e.stack);
