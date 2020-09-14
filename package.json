@@ -9,7 +9,9 @@
   "author": "Gaji Mahamud",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "github:discordjs/opus",
     "discord.js": "^12.3.1",
-    "math.js": "^1.1.46"
+    "math.js": "^1.1.46",
+    "ytdl-core": "^3.2.2"
   }
 }
