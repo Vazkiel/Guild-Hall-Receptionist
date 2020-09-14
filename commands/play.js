@@ -1,5 +1,4 @@
 const ytdl  = require('ytdl-core');
-const { getInfo } = require('ytdl-core');
 
 exports.run = async (client, message, args, ops) => {
 
