@@ -1,18 +1,15 @@
-// Required Packages — 
+// Constant Vriables —
 const Discord = require('discord.js');
 const client = new Discord.Client({disableEveryone: true});
-
-// Constant Vriables —
 const config = require('./config.json');
 const token = config.token;
 const prefix = config.prefix;
 const ownerID = config.ownerID;
+const active = new Map();
 
-// Ready Event —
-client.on('ready', () => {
-    console.log(`${client.user.username} is online`);
-    client.user.setActivity("Prefix is '>'", {type: 'STREAMING'});
-});
+
+//Discord Login — 
+client.login(config.token);
 
 // Listen Events —
 client.on('message', message => {
@@ -29,7 +26,8 @@ client.on('message', message => {
     try {
         // Options —
         let ops = {
-            ownerID: ownerID
+            ownerID: ownerID,
+            active: active
         }
 
         let commandFile = require(`./commands/${cmd}.js`);
@@ -40,5 +38,8 @@ client.on('message', message => {
     }
 });
 
-//Discord Login — 
-client.login(config.token);
+// Ready Event —
+client.on('ready', () => {
+    console.log(`${client.user.username} is online`);
+    client.user.setActivity("Prefix is '>'", {type: 'STREAMING'});
+});
