@@ -28,7 +28,7 @@ exports.run = async (client, message, args, ops) => {
     })
 
     if(!data.dispatcher) play(client, ops, data);
-    else message.channel.send(`Added to queue:\n ${info.videoDetails.title}\n Requested by: ${message.author.username}`);
+    else message.channel.send(`__**Added to queue:**__\n**${info.videoDetails.title} —— Requested by:** *${message.author.username}*`);
 
     ops.active.set(message.guild.id, data);
 }
@@ -37,7 +37,7 @@ async function play(client, ops, data) {
     data.dispatcher = await data.connection.play(ytdl(data.queue[0].url, {filter:'audioonly'}));
     data.dispatcher.guildID = data.guildID;
 
-    client.channels.cache.get(data.queue[0].annouceChannel).send(`Now playing:\n ${data.queue[0].songTitle}\n Requested by: ${data.queue[0].requester}`);
+    client.channels.cache.get(data.queue[0].annouceChannel).send(`__**Now playing:**__\n**${data.queue[0].songTitle} —— Requested by:** *${data.queue[0].requester}*`);
 
     data.dispatcher.once('finish', function() {
         finish(client, ops, this)
